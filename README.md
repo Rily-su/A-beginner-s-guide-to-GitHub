@@ -112,8 +112,73 @@
   1. 观察底部终端的输出结果。
    ![截图](https://fastly.jsdelivr.net/gh/RiRi-Zinnia/A-beginner-s-guide-to-GitHub@main/images/image17.png)
 - **小贴士/注意事项**：如果提示找不到 Python，请检查是否在安装时勾选了 “Add Python to PATH”，或重启 VSCode。
+### 任务六：使用 VSCode 源代码管理面板修改代码并 push 到个人 GitHub（核心）
 
-### 五、恭喜你已经成功实现github的基础用法啦，后续教学你将学到：修改代码并提交到个人GitHub、创建自己的仓库并上传代码、创建代码的分支并Commit和Push，关注主播不迷路，只为做真正零基础小白的教学！
+- **任务目标**：在本地修改代码，并通过 VSCode 把修改推送回你自己 Fork 的仓库。
+- **完成标准**：刷新你 Fork 仓库的 GitHub 网页，能看到刚才这次 commit 与改动后的文件内容。
+
+#### VSCode 源代码管理面板操作步骤（无需安装任何插件）
+
+**步骤 1：打开源代码管理面板**
+
+在 VSCode 左侧边栏，点击"源代码管理"图标（图标形状为分叉的树丫，位于"资源管理器"图标下方）。也可以使用快捷键 Ctrl+Shift+G 直接打开。
+
+**步骤 2：修改代码并保存**
+
+在编辑器中打开任意文件进行修改（例如在 hello.py 末尾添加一行 `print("Hello GitHub!")`），修改后按 Ctrl+S 保存。保存后，源代码管理面板的"更改"列表中会自动显示该文件，文件名右侧会出现一个字母"U"（表示未暂存）。
+
+**步骤 3：暂存更改（Stage Changes）**
+
+把鼠标移到文件名上，文件名右侧会出现一个"+"号，点击该"+"号，文件会从"更改"列表移动到上方的"暂存的更改"列表，字母"U"变为字母"A"（表示已暂存）。如果要暂存所有更改，可点击"更改"列表右侧的"+"号（全部暂存）。
+
+**步骤 4：填写提交说明并提交（Commit）**
+
+在面板顶部的文本框中输入提交说明（例如"update hello"），然后按 Ctrl+Enter 提交，或点击文本框右侧的"提交"按钮（勾选图标）。提交后，"暂存的更改"列表会清空，面板底部状态栏会显示当前分支名称和"↓0 ↑1"（表示有 1 个提交待推送）。
+
+**步骤 5：推送到 GitHub（Push）**
+
+点击面板顶部的"同步更改"按钮（圆形箭头图标），或点击底部状态栏的"↑1"字样。首次推送时，VSCode 会弹出提示"是否登录 GitHub?"，点击"登录"按钮，浏览器会自动打开 GitHub 授权页面。在浏览器中点击"Authorize"授权，返回 VSCode 即可完成推送。
+
+**步骤 6：验证推送结果**
+
+推送成功后，打开浏览器访问你 Fork 的 GitHub 仓库页面，刷新页面即可看到刚才的提交记录和修改后的文件内容。
+
+#### 备选方案：终端命令行（与图形界面等效）
+
+```powershell
+git add .                     # 暂存所有改动
+git commit -m "update hello"  # 提交一次快照
+git push -u origin main       # 首次 push，-u 绑定上游分支
+# 之后每次只需 git add . / commit / git push
+```
+
+- **小贴士**：Fork 场景下，若你 clone 的是原仓库地址，origin 指向的是别人的仓库，push 会报 403/404。需先把 origin 改成你自己的 Fork 地址：`git remote set-url origin https://github.com/<你的用户名>/<仓库名>.git`
+
+### 任务七：创建自己的仓库并上传代码
+
+- **任务目标**：从零新建一个 GitHub 仓库，并把本地已有代码上传上去。
+- **完成标准**：GitHub 网页上你新建的空仓库里，出现了本地上传的全部文件与一次提交记录。
+
+**操作步骤：**
+
+1. GitHub 右上角 "+" → New repository，填写仓库名，保持仓库为空（不要勾选初始化 README），点 Create repository。
+
+2. 在本地代码文件夹打开终端，依次执行：
+
+```powershell
+git init                       # 在本地初始化 Git 仓库
+git add .                      # 暂存所有文件
+git commit -m "first commit"   # 首次提交
+git remote add origin https://github.com/<你的用户名>/<仓库名>.git
+git push -u origin main        # 推送（若本地是 master，把 main 换成 master）
+```
+
+- **小贴士**：若 push 报 "src refspec main does not match"，多半是本地默认分支叫 master，用 `git branch -M main` 改名后再 push。
+
+---
+
+## 五、恭喜你已经成功实现github的基础用法啦，后续教学你将学到：修改代码并提交到个人GitHub、创建自己的仓库并上传代码、创建代码的分支并Commit和Push，关注主播不迷路，只为做真正零基础小白的教学！
+
 
 ## 六、附录
 
